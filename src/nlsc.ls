@@ -16,8 +16,8 @@ L.NLSC.WMS = L.TileLayer.WMS.extend do
     @defaultWmsParams.'layers' = @layerid
     wmsParams = L.extend {}, @defaultWmsParams
     for i of options
-      wmsParams[i] = options[i] if (not @options.hasOwnProperty i) && i isnt 'crs'
-    options = L.setOptions this, options
+      wmsParams[i] = options[i] if (not @options[i]?) && i isnt 'crs'
+    options = L.setOptions @, options
     wmsParams.width = wmsParams.height = options.tileSize * if options.detectRetina && L.Browser.retina then 2 else 1
     @wmsParams = wmsParams
 
