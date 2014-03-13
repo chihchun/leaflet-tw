@@ -59,8 +59,10 @@ for k, m of maps
 map = ((new L.Map 'map', {
   center: new L.LatLng 22.9920289, 120.20462829999997
   zoom: 15
-  layers: [osm, maps.tainan_1875]
+  layers: [osm]
 }).addControl new L.Control.Scale).addControl new L.Control.Layers {'開放街圖': osm}, overlayMaps
+
+$.getJSON 'http://nominatim.openstreetmap.org/search/?q=%E8%B5%A4%E5%B4%81%E6%A8%93&polygon_geojson=1&class=historic&type=monument&osm_type=way&format=json&json_callback=?', ([a, b]) -> L.geoJson a.geojson, {} .addTo map 
 
 </script>
 <script src="./livescript.js"></script>
