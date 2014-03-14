@@ -15,7 +15,7 @@
 <script type='text/ls'>
 
 mkmap = -> 
-    new L.RCHSS[it] {opacity:0.75}
+    new L.RCHSS[it] {opacity:0.65}
 
 osm = new L.OSM.Mapnik
 mapnames = 
@@ -59,7 +59,7 @@ for k, m of maps
 map = ((new L.Map 'map', {
   center: new L.LatLng 22.9920289, 120.20462829999997
   zoom: 15
-  layers: [osm]
+  layers: [osm, maps.tainan_1875]
 }).addControl new L.Control.Scale).addControl new L.Control.Layers {'開放街圖': osm}, overlayMaps
 
 find_elements = (q, succes) ->
@@ -67,8 +67,28 @@ find_elements = (q, succes) ->
     $.getJSON url, succes
         .fail -> console.log 'can not find element.'
 
-[a, b, c, d] <- find_elements '赤崁樓'
-L.geoJson a.geojson, {} .addTo map 
+try_add_element = (m, q, f, done) ->
+    res <- find_elements q
+    done! unless res
+    e = f res
+    done! unless e
+    L.geoJson e.geojson,{} .addTo m .bindPopup q
+    done!
+
+mk_marker = (m, name, gps) -> 
+    L.marker gps .addTo m .bindPopup name
+
+<- try_add_element map, '西門遺址', -> it.0
+<- try_add_element map, '大南門', -> it.0
+<- try_add_element map, '東門城', -> it.0
+<- try_add_element map, '小西門遺址', -> it.0
+
+mk_marker map, "兌悅門", [23.0007511428658, 120.194367749974] 
+mk_marker map, "大東門", [22.9870755236531, 120.217285049648] 
+
+ps = 
+    [22.9870755236531, 120.217285049648] 
+    [22.9870004482941, 120.203560218288]
 
 </script>
 <script src="./livescript.js"></script>
