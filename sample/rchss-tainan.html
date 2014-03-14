@@ -62,7 +62,13 @@ map = ((new L.Map 'map', {
   layers: [osm]
 }).addControl new L.Control.Scale).addControl new L.Control.Layers {'開放街圖': osm}, overlayMaps
 
-$.getJSON 'http://nominatim.openstreetmap.org/search/?q=%E8%B5%A4%E5%B4%81%E6%A8%93&polygon_geojson=1&class=historic&type=monument&osm_type=way&format=json&json_callback=?', ([a, b]) -> L.geoJson a.geojson, {} .addTo map 
+find_elements = (q, succes) ->
+    url = "http://nominatim.openstreetmap.org/search/?q=#{q}&polygon_geojson=1&format=json&json_callback=?"
+    $.getJSON url, succes
+        .fail -> console.log 'can not find element.'
+
+[a, b, c, d] <- find_elements '赤崁樓'
+L.geoJson a.geojson, {} .addTo map 
 
 </script>
 <script src="./livescript.js"></script>
