@@ -14,3 +14,7 @@ $ npm run prepublish
 - [嘉義百年地圖](sample/rchss-chiayi.html)
 - [台南百年地圖](sample/rchss-tainan.html)
 
+# Authors
+
+- Rex Tsai aka chihchun
+- 陳信屹 aka hychen
