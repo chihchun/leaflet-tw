@@ -46,7 +46,8 @@ map = new L.Map('map', {
 
 function xapi(){
     $.ajax({
-        url: "http://open.mapquestapi.com/xapi/api/0.6/node[historic=*][bbox=" + map.getBounds().toBBoxString() + "]",
+        // url: "http://open.mapquestapi.com/xapi/api/0.6/node[historic=*][bbox=" + map.getBounds().toBBoxString() + "]",
+        url: "http://www.overpass-api.de/api/xapi?node[historic=*][bbox=" + map.getBounds().toBBoxString() + "]",
         dataType: "xml",
         success: function (xml) {
            new L.OSM.DataLayer(xml).addTo(map);
