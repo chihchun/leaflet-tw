@@ -2,8 +2,13 @@
     <head>
         <title>AFASI</title>
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.css" />
+        <link rel="stylesheet" href="http://chihchun.github.io/leaflet-control-geocoder/Control.Geocoder.css">
         <script src="http://cdn.leafletjs.com/leaflet-0.7.2/leaflet.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+        <script src="http://chihchun.github.io/leaflet-control-geocoder/Control.Geocoder.js"></script>
+        <script src="http://chihchun.github.io/leaflet-plugins/control/Permalink.js"></script>
+        <script src="http://chihchun.github.io/leaflet-plugins/control/Permalink.Marker.js"></script>
+        <script src="http://chihchun.github.io/leaflet-plugins/control/Permalink.Layer.js"></script>
         <script src="./leaflet-osm.js"></script>
         <script src="../lib/atis.js"></script>
         <style>
@@ -26,15 +31,17 @@ var baseMaps = {};
 for (var i in maps) {
     baseMaps[maps[i].name] = maps[i];
 }
-
+var layers = new L.Control.Layers(baseMaps);
 // set up the map
 var map = new L.Map('map', {
-    center: new L.LatLng( 25.03738, 121.56351 ),
+    center: new L.LatLng( 23.470046, 120.957688 ), // 玉山
     zoom: 17,
     layers: baseMaps["農航所航照"],
 } )
 .addControl(new L.Control.Scale())
-.addControl(new L.Control.Layers(baseMaps));
+.addControl(new L.Control.geocoder({ placeholder: "搜尋", showResultIcons: true, geocoder: new L.Control.Geocoder.Nominatim({serviceUrl: "http://open.mapquestapi.com/nominatim/v1/"}) }))
+.addControl(layers)
+.addControl(new L.Control.Permalink({text: 'Permalink', layers: layers}))
 
 </script>
     </body>
