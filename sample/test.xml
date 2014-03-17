@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Osmosis SNAPSHOT-r26564">
+  <node id="946524530" version="1" timestamp="2010-10-13T09:26:18Z" uid="15686" user="Dimitri_Junker" changeset="6027467" lat="22.9973584" lon="120.2025017">
+    <tag k="name" v="ChiKanLou"/>
+    <tag k="historic" v="monument"/>
+  </node>
+</osm>

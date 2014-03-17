@@ -33,16 +33,18 @@ for (k in maps) {
   overlayMaps[m.name] = m;
 }
 
+var xdata = new L.OSM.DataLayer();
 map = new L.Map('map', {
   center: new L.LatLng(22.9920289, 120.20462829999997),
   zoom: 15,
   layers: [osm, maps.tainan_1875]
 })
+.addLayer(xdata)
 .addControl(new L.Control.Scale)
 .addControl(new L.Control.Layers({ '開放街圖': osm }, overlayMaps))
 .on('zoomend', xapi)
-.on('dragend', xapi)
-.on('load', xapi);
+.on('dragend', xapi);
+
 
 function xapi(){
     $.ajax({
@@ -50,11 +52,14 @@ function xapi(){
         url: "http://www.overpass-api.de/api/xapi?node[historic=*][bbox=" + map.getBounds().toBBoxString() + "]",
         dataType: "xml",
         success: function (xml) {
-           new L.OSM.DataLayer(xml).addTo(map);
+            map.removeLayer(xdata);
+            xdata = new L.OSM.DataLayer(xml);
+            map.addLayer(xdata);
         }
     });
 }
 
+xapi();
 </script>
     </body>
 </html>
