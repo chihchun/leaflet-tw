@@ -8,7 +8,7 @@ L.ATIS.WMS = L.TileLayer.WMS.extend do
     version: '1.1.0'
     layers: ''
     styles: ''
-    format: 'image/gif'
+    format: 'image/jpeg'
     transparent: true
   
   options: {attribution: '© <a target="_target" href="http://www.afasi.gov.tw/">農林航空測量所</a>'}
