@@ -11,7 +11,7 @@ L.NLSC.WMS = L.TileLayer.WMS.extend do
     format: 'image/png'
     transparent: true
   
-  options: {attribution: '© <a target="_target" href="http://maps.nlsc.gov.tw/">國土測繪圖資網路地圖服務</a>'}
+  options: {uppercase: true, crs: null, attribution: '© <a target="_target" href="http://maps.nlsc.gov.tw/">國土測繪圖資網路地圖服務</a>'}
   initialize: (options) ->
     @defaultWmsParams.'layers' = @layerid
     wmsParams = L.extend {}, @defaultWmsParams
@@ -40,6 +40,22 @@ L.NLSC.EMAP1 = L.NLSC.WMS.extend do
 L.NLSC.EMAP2 = L.NLSC.WMS.extend do
   name: '通用版電子地圖透明'
   layerid: 'EMAP2'
+
+L.NLSC.EMAP5 = L.NLSC.WMS.extend do
+  name: '通用電子地圖(不含等高線)'
+  layerid: 'EMAP5'
+
+L.NLSC.EMAP6 = L.NLSC.WMS.extend do
+  name: '通用電子地圖(套疊等高線)'
+  layerid: 'EMAP6'
+
+L.NLSC.EMAP7 = L.NLSC.WMS.extend do
+  name: '通用電子地圖英語透明'
+  layerid: 'EMAP7'
+
+L.NLSC.EMAP8 = L.NLSC.WMS.extend do
+  name: '通用電子地圖英語'
+  layerid: 'EMAP8'
 
 L.NLSC.EMAP = L.NLSC.WMS.extend do
   name: '通用版電子地圖'
